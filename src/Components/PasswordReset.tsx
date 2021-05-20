@@ -27,6 +27,7 @@ const PasswordReset = () => {
         setError(null);
       });
   };
+
   return (
     <div className="mt-8">
       <h1 className="text-xl text-center font-bold mb-3">
