@@ -1,10 +1,10 @@
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, } from 'react-router-dom';
-import PasswordReset from '../Components/PasswordReset';
-import ProfilePage from '../Components/ProfilePage';
-import SignIn from '../Components/SignIn';
-import SignUp from '../Components/SignUp';
+import PasswordReset from '../components/PasswordReset';
+import ProfilePage from '../components/ProfilePage';
+import SignIn from '../components/SignIn';
+import SignUp from '../components/SignUp';
 
 const RoutingContainer = () => {
   const [user, setUser] = useState(null);
