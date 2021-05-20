@@ -21,8 +21,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "prebuild": "tailwind build ./src/styles/index.css -o ./src/styles/tailwind.css",
+    "start": "craco start",
+    "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
@@ -45,11 +46,12 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.1.2",
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9.8.6",
-    "postcss": "^8.2.15",
+    "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
 }
