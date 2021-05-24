@@ -19,7 +19,7 @@ const RoutingContainer = () => {
   }, [user]);
   return (
     user ?
-      <ProfilePage/>
+      <ProfilePage user={user}/>
       :
       <Router>
         <Switch>

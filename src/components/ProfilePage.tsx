@@ -1,27 +1,63 @@
-import React, { useContext } from 'react';
-import { signInWithGoogle, signOut } from '../firebase';
+import DeleteIcon from '@material-ui/icons/Delete';
+import React, { useState } from 'react';
+import { signOut } from '../firebase';
 import StyledButton from './StyledButton';
+import StyledInputField from './StyledInputField';
+import CreateIcon from '@material-ui/icons/Create';
 
-const ProfilePage = () => {
-  // const {photoURL, displayName, email} = user as any;
+const _ = require('lodash');
+
+const ProfilePage = (props: any) => {
+  const [todoList, setTodoList] = useState<[string]>(['']);
+  const [todo, setTodo] = useState<string>('');
+
+  function handleAddTodo() {
+    let array = todoList;
+    let newArray = _.concat(array, todo);
+    setTodoList(newArray);
+  }
+
+  function handleRemoveTodo(item: any) {
+    let array = todoList;
+    let newArray = _.pull(array, item);
+    console.log('XXXXXXXXXX', newArray);
+    setTodoList(newArray);
+  }
 
   return (
     <div className="mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
       <div className="flex border flex-col items-center md:flex-row md:items-start border-blue-400 px-3 py-4">
-        {/*<div*/}
-        {/*  style={{*/}
-        {/*    background: `url(${photoURL || 'https://res.cloudinary.com/dqcsk8rsc/image/upload/v1577268053/avatar-1-bitmoji_upgwhc.png'})  no-repeat center center`,*/}
-        {/*    backgroundSize: "cover",*/}
-        {/*    height: "200px",*/}
-        {/*    width: "200px"*/}
-        {/*  }}*/}
-        {/*  className="border border-blue-300"*/}
-        {/*></div>*/}
-        {/*<div className = "md:pl-4">*/}
-        {/*  <h2 className = "text-2xl font-semibold">{displayName}</h2>*/}
-        {/*  <h3 className = "italic">{email}</h3>*/}
-        {/*</div>*/}
+        <StyledInputField
+          id="todo"
+          label="Todo"
+          value={todo}
+          onChange={(event: any) => setTodo(event.target.value)}
+          multiline={true}
+          endAdornment={<CreateIcon/>}
+        />
       </div>
+
+      <div className="w-full flex flex-col">
+        <StyledButton
+          type={'primary'}
+          onClick={() => {
+            handleAddTodo();
+          }}
+          label={'Submit'}
+        />
+      </div>
+
+      <div>
+        {todoList.length > 1 &&
+        todoList
+          .map((item, index) => (
+            <div className="flex flex-row w-full">
+              <>{item}</>
+              <DeleteIcon onClick={() => handleRemoveTodo(item)}/>
+            </div>
+          ))}
+      </div>
+
       <div className="w-full flex flex-col">
         <StyledButton
           type={'destructive'}
